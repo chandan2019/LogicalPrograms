@@ -18,6 +18,7 @@ public class BinaryTreeOperations {
 		}
 	}
 	
+	static Node ans; // this is used to hold LCA node in backtracking scenario
 	public static boolean findNodePathFromRoot(Node root, List<Integer> pathList, int data){
 		
 		
@@ -59,24 +60,31 @@ public class BinaryTreeOperations {
 		return false;
 	}
 	
-	/*public static boolean lowestCommonAncestor(Node root, List<Integer> l1, List<Integer> l2, int p, int q, int ) {
+	public static boolean lowestCommonAncestor(Node root,int p, int q ) {
 		
 		
 		
 		if(root == null)
 			return false;
 		
-		if(root.data == data)
-			return true;
+		int lresult= lowestCommonAncestor(root.left, p,q)?1:0;
+		int rresult = lowestCommonAncestor(root.right, p,q)?1:0;
+		int mresult = (root.data == p || root.data == q)?1:0;
 		
-	}*/
+		if(lresult + rresult + mresult >= 2)
+			ans = root;
+		
+		return (lresult + rresult + mresult > 0);
+		
+	}
 	
 	public static int findCommonAncestor(List<Integer>pathList1, List<Integer> pathList2) {
 		
 		int ar1size = pathList1.size();
 		int ar2size = pathList2.size();
 		
-		int arlenght = Math.max(ar1size, ar2size);
+		int arlenght = Math.min(ar1size, ar2size); // have to take minimum length arraylist,
+		//beyond that elements could not be compared. because the min arraylist finishes here
 		
 		for(int i=0;i<arlenght;i++) {
 			
@@ -98,10 +106,10 @@ public class BinaryTreeOperations {
 		root.left.right = new Node(5);
 		root.right.left = new Node(6);
 		root.right.right = new Node(7);
-		/*root.left.left.left = new Node(8);
+		root.left.left.left = new Node(8);
 		root.left.right.right = new Node(9);
 		root.right.left.left = new Node(10);
-		root.right.right.right = new Node(11);*/
+		root.right.right.right = new Node(11);
 		
 		List<Integer> pathList1 = new ArrayList<>();
 		List<Integer> pathList2 = new ArrayList<>();
@@ -125,8 +133,6 @@ public class BinaryTreeOperations {
 		
 		/*----------------------END--------------------------------*/
 		
-		//lowestCommonAncestor(root);
-		
 		
 		/*Below logic is back tracking logic to find path od node from root, i.e at time of returning on our returned results we are storing 
 		 * data in out list*/
@@ -141,6 +147,13 @@ public class BinaryTreeOperations {
 		}
 		
 		/*-------------------END--------------------------*/
+		
+		
+		
+		/*LCA by 2nd approach, backtracking*/
+		
+		lowestCommonAncestor(root, p, q);
+		System.out.println("lCA ans " + ans.data);
 	}
 
 }
