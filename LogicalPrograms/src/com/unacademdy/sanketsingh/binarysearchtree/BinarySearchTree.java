@@ -17,6 +17,10 @@ public class BinarySearchTree {
 	}
 
 	static Node root = null;
+	static int increment = 0;
+    static int lcount = 0;
+    static int rcount = 0;
+    static int[] result = new int[5];
 
 	public static Node buildBSTRec() {
 		Scanner sc = new Scanner(System.in);
@@ -56,15 +60,20 @@ public class BinarySearchTree {
 			root.right = delete(root.right, data);
 			return root;
 		} else {
+			Node temp = null;
 			if (data == root.data) {
 
 				if (root.left == null && root.right == null)
 					return null;
-				else if (root.left != null && root.right == null)
-					return root.left;
-				else if (root.left == null && root.right != null)
-					return root.right;
-				else {// deleting node having left and right child. Logic: search left most node of
+				else if (root.left != null && root.right == null) {
+					temp = root.left;
+					root.left = null;
+					return temp;
+				} else if (root.left == null && root.right != null) {
+					temp = root.right;
+					root.right = null;
+					return temp;
+				} else {// deleting node having left and right child. Logic: search left most node of
 						// RST of root node(to be deleting node)
 						// replace root node data with RST left most node data.And then delete the left
 						// most node.
@@ -92,13 +101,61 @@ public class BinarySearchTree {
 		printBST(root.right);
 	}
 
+	
+	 public static boolean isValidBST(Node root) {
+	        if(root == null)
+	            return false;
+	        
+	        // int count  = countNode(root);
+	        //System.out.println("count" + count);
+	       // int[] a = new int[count];
+	        inOrder(root);
+	       
+	        for(int i = 0;i<result.length;i++){
+	        System.out.print(result[i]);
+	        }
+	        
+	        boolean flag = true;
+	        for(int i = 0;i<result.length-1;i++){
+	            
+	            if(result[i]>result[i++]){
+	                flag =  false;
+	                 break;
+	            }
+	            
+	        }
+	        return flag;
+	        
+	    }
+	    public static int countNode(Node root){
+	        
+	        if(root == null)
+	            return 0;
+	        lcount = countNode(root.left);
+	        rcount = countNode(root.right);
+	        
+	        return 1 + lcount + rcount;
+	    }
+	    public static void inOrder(Node root){
+	        
+	        if(root == null)
+	            return;
+	        inOrder(root.left);
+	        result[increment++] = root.data;
+	        inOrder(root.right);
+	        
+	    }
 	public static void main(String[] args) {
 
 		Node root = buildBSTRec();
 		printBST(root);
-		delete(root, 8);
+		/*delete(root, 8);
 		System.out.println("after delete");
-		printBST(root);
+		printBST(root);*/
+		
+		boolean validBST = isValidBST(root);
+		
+		System.out.println("validBST " + validBST);
 
 	}
 

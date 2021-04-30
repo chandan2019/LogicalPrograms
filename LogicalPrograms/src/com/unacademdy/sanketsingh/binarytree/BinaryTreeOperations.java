@@ -60,15 +60,15 @@ public class BinaryTreeOperations {
 		return false;
 	}
 	
-	public static boolean lowestCommonAncestor(Node root,int p, int q ) {
+	public static boolean lowestCommonAncestorUsingBacktracking(Node root,int p, int q ) {
 		
 		
 		
 		if(root == null)
 			return false;
 		
-		int lresult= lowestCommonAncestor(root.left, p,q)?1:0;
-		int rresult = lowestCommonAncestor(root.right, p,q)?1:0;
+		int lresult= lowestCommonAncestorUsingBacktracking(root.left, p,q)?1:0;
+		int rresult = lowestCommonAncestorUsingBacktracking(root.right, p,q)?1:0;
 		int mresult = (root.data == p || root.data == q)?1:0;
 		
 		if(lresult + rresult + mresult >= 2)
@@ -85,17 +85,62 @@ public class BinaryTreeOperations {
 		
 		int arlenght = Math.min(ar1size, ar2size); // have to take minimum length arraylist,
 		//beyond that elements could not be compared. because the min arraylist finishes here
-		
-		for(int i=0;i<arlenght;i++) {
+		int ca = -1;
+		boolean flag = false;
+		for(int i=0;i<arlenght;i++) {  //test case1 : ar1  = [1,2,3] ar2 = [1,2,5,6]  case 2: ar1  = [1,2] ar2 = [1,2,5,6]
 			
-			if(pathList1.get(i) != pathList2.get(i))
-				return pathList1.get(i-1);
-			
+			if(pathList1.get(i) != pathList2.get(i)) {
+				ca = pathList1.get(i-1);
+				flag = true;
+			}
 		}
 		
-		return -1;
+		if(flag)
+		return ca;
+		else
+			return pathList1.get(pathList1.size()-1); 
 		}
 	
+	public static int distanceOfNodeFromRoot(Node root, int data) {
+		
+		int dist = -1;
+		if(root == null)
+			return -1;
+		
+		if(root.data == data ||
+				(dist = distanceOfNodeFromRoot(root.left, data))>=0
+				|| (dist = distanceOfNodeFromRoot(root.right, data))>=0 )
+			return dist+1;
+		
+		return dist;
+	}
+	
+	
+	public static int distanceBetween2Nodes(Node root, int p, int q) {
+		// Dist(p, q) = Dist(root, p) + Dist(root, q) -2 * Dist(Root, LCA)
+		//1.  LCA to be calculated
+		//2. distance from root to node
+		
+		if(root == null)
+			return -1;
+		boolean lca = lowestCommonAncestorUsingBacktracking(root, p, q);
+		int dist = distanceOfNodeFromRoot(root, p) + distanceOfNodeFromRoot(root, q) - 2 * distanceOfNodeFromRoot(root, ans.data);
+		
+		return dist;
+	}
+	
+	
+	public static int distanceBetween2Nodes2ndApproach(Node root,int p,int q) {
+		
+		//Dist(p, q) = Dist(LCA, p) + Dist(LCA, q)
+		if(root == null)
+			return -1;
+		boolean lca = lowestCommonAncestorUsingBacktracking(root, p, q);
+		int dist = distanceOfNodeFromRoot(ans, p) + distanceOfNodeFromRoot(ans, q); // LCA is stored in ans node.
+		
+		return dist;
+		
+	}
 	public static void main(String[] args) {
 
 		
@@ -129,7 +174,7 @@ public class BinaryTreeOperations {
 		pathList2.stream().forEach(System.out::println);
 		
 		int lca = findCommonAncestor(pathList1, pathList2);
-		System.out.println("least comon ancestor " + lca);
+		System.out.println("least comon ancestor  = " + lca);
 		
 		/*----------------------END--------------------------------*/
 		
@@ -151,9 +196,26 @@ public class BinaryTreeOperations {
 		
 		
 		/*LCA by 2nd approach, backtracking*/
+		//TC : O(n) 
+		//SC : O(n) : for recursive call
+		lowestCommonAncestorUsingBacktracking(root, p, q);
+		System.out.println("lCA ans = " + ans.data);
 		
-		lowestCommonAncestor(root, p, q);
-		System.out.println("lCA ans " + ans.data);
+		
+		int distanceOfNodeFromRoot = distanceOfNodeFromRoot(root, p);
+		
+		System.out.println("distanceOfNodeFromRoot = " + distanceOfNodeFromRoot);
+		
+		/*1st Approach*/
+		int distanceBetween2Nodes = distanceBetween2Nodes(root, p, q);
+		
+		System.out.println("distanceBetween2Nodes  = " + distanceBetween2Nodes);
+		
+		/*2nd approach*/
+		int distanceBetween2Nodes2ndApproach = distanceBetween2Nodes2ndApproach(root, p, q);
+		
+		System.out.println("distanceBetween2Nodes2ndApproach  = " + distanceBetween2Nodes2ndApproach);
+		
 	}
 
 }
