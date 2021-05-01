@@ -1,4 +1,4 @@
-package com.unacademdy.sanketsingh.binarysearchtree;
+package com.ss.binarysearchtree;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package com.unacademdy.sanketsingh.binarytree;
+package com.ss.binarytree;
 
 import java.util.ArrayList;
 import java.util.Collections;

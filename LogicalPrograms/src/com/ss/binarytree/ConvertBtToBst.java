@@ -1,4 +1,4 @@
-package com.unacademdy.sanketsingh.binarytree;
+package com.ss.binarytree;
 
 import java.util.Arrays;
 

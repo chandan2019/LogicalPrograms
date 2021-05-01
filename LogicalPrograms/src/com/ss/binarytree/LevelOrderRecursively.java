@@ -1,4 +1,4 @@
-package com.unacademdy.sanketsingh.binarytree;
+package com.ss.binarytree;
 
 public class LevelOrderRecursively {
 
@@ -69,7 +69,7 @@ public class LevelOrderRecursively {
 	static void printGivenLevel(Node root, int level, int temp) {
 		if (root == null)
 			return;
-		if (level == 0)
+		if (level == 1)
 			System.out.print(root.data + " ");
 		else if (level > 0) {
 			printGivenLevel(root.left, level - 1, temp);

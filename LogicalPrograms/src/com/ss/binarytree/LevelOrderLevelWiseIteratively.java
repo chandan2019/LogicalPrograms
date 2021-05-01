@@ -1,4 +1,4 @@
-package com.unacademdy.sanketsingh.binarytree;
+package com.ss.binarytree;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -69,7 +69,7 @@ public class LevelOrderLevelWiseIteratively {
 		      // condition to check the
 		      // occurence of next level
 		      if (curr == null) {
-		        if (!q.isEmpty()) {
+		        if (!q.isEmpty()) { // last level null will try to add multiple null, so checking here
 		          q.add(null);
 		          System.out.println();
 		        }
@@ -92,12 +92,12 @@ public class LevelOrderLevelWiseIteratively {
 			Node  root= new Node(1);
 	       root.left= new Node(5);
 	       root.right= new Node(30);
-	       root.left.left= new Node(1);
+	       root.left.left= new Node(11);
 	       root.left.right= new Node(8);
-	       root.right.left= new Node(15);
+	       /*root.right.left= new Node(15);
 	       root.right.right= new Node(31);
 	       root.left.right.left= new Node(6);
-	       root.left.right.right= new Node(10);
+	       root.left.right.right= new Node(10)*/;
 	       
 	       levelOrderTraversal(root);
 		
