@@ -42,7 +42,8 @@ public class ConvertBtToBst {
 		 
 		 int n = countNodes(root);
 		 
-		 int ar[] = new int[n];
+		 int ar[] = new int[n]; /* this array can be replaced with arraylist or vector(extra traversal 
+		 will not be required for knowing no. of nodes)*/
 		 
 		 storeInorderOfBt(root, ar);
 		 
