@@ -2,11 +2,10 @@ package com.collection.sort;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 public class Test {
 
@@ -60,6 +59,19 @@ public class Test {
 		
 		System.out.println(synchronizedList);
 		
+		
+		Map<String, String>  map= new HashMap<String, String>();
+		
+		String one = "Barclays";
+		String two = "Barclays";
+		String three = new String("Barclays");
+		StringBuilder four = new StringBuilder("Barclays");
+		map.put(one, one);
+		map.put(two, two);
+		map.put(three, three);
+		map.put(four.toString(), four.toString());
+		
+		System.out.println("s " + map.size());
 		
 	}
 

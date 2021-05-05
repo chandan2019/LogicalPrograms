@@ -23,16 +23,16 @@ public class ConvertBtToBst {
 	 //creating array from Bt and From array to BT.
 	 static int arrayToTreeIndex = 0;
 	 
-	 public static void arrayToBst(Node root,int[] ar) {
+	 public static void binaryTreeNodesReplcaeWithSortedArrayValues(Node root,int[] ar) {
 		 
 		 if(root == null)
 			 return ;
 		 
-		 arrayToBst(root.left, ar);
+		 binaryTreeNodesReplcaeWithSortedArrayValues(root.left, ar);
 		 
 		 root.data = ar[arrayToTreeIndex++];
 		 
-		 arrayToBst(root.right, ar);
+		 binaryTreeNodesReplcaeWithSortedArrayValues(root.right, ar);
 		 
 		 
 	 }
@@ -44,24 +44,26 @@ public class ConvertBtToBst {
 		 
 		 int ar[] = new int[n];
 		 
-		 storeInorder(root, ar);
+		 storeInorderOfBt(root, ar);
+		 
+		 //Inorder of BT is sorted here
 		 Arrays.sort(ar);
 		 
-		 arrayToBst(root, ar);
+		 binaryTreeNodesReplcaeWithSortedArrayValues(root, ar);
 		 
 	 }
 	 
 	 
-	 public static void storeInorder(Node root, int ar[]) {
+	 public static void storeInorderOfBt(Node root, int ar[]) {
 		 
 		 if(root == null)
 			 return;
 		 
-		 storeInorder(root.left, ar);
+		 storeInorderOfBt(root.left, ar);
 		 ar[treeToArrayIndex++] = root.data;
 		 
 		 
-		 storeInorder(root.right, ar);
+		 storeInorderOfBt(root.right, ar);
 		 
 	 }
 	 
@@ -96,6 +98,8 @@ public class ConvertBtToBst {
 		    root.right.right = newNode(5);
 		    
 		 // convert Binary Tree to BST
+		    //TC : O(n logn) due to sorting
+		    //SC: O(n);
 		    binaryTreeToBST(root);
 		    
 		    printInorder(root);
