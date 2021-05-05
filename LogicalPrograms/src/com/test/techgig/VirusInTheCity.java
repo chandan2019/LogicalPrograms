@@ -3,21 +3,34 @@ package com.test.techgig;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.TreeMap;
 
 public class VirusInTheCity {
 	
 	
-	public static void saferType1(String s) {
+	public static void saferType1(String[] s) {
 		
-		/*declaring a treemap which will sort data in descending order*/
-		Map<Integer, Integer> mapWithcharCounts = new TreeMap<>(Collections.reverseOrder());
+		int l = 0;
+		while(l < s.length) {
+		if(s[l].length() == 0)
+			return;
 		
-		Map<Integer, Integer> mapwithExchageKeyValues = new TreeMap<>(); 
+		l++;
+		}
 		
-		for(int i=0; i<s.length();i++) {
+		
+				int j = 0;
+		while(j < s.length) {
 			
-			mapWithcharCounts.put((int) s.charAt(i), mapWithcharCounts.getOrDefault((int)s.charAt(i), 0) + 1);
+			/*declaring a treemap which will sort data in descending order*/
+			Map<Integer, Integer> mapWithcharCounts = new TreeMap<>(Collections.reverseOrder());
+			
+			Map<Integer, Integer> mapwithExchageKeyValues = new TreeMap<>(); 
+			String str = s[j];
+		for(int i=0; i<str.length();i++) {
+			
+			mapWithcharCounts.put((int) str.charAt(i), mapWithcharCounts.getOrDefault((int)str.charAt(i), 0) + 1);
 		}
 		
 		
@@ -29,10 +42,13 @@ public class VirusInTheCity {
 		}
 		
 		// iterating a map on stream api
-		mapwithExchageKeyValues.entrySet().stream().forEach(k -> System.out.println(k.getKey()+ " " + k.getValue() ));
+		mapwithExchageKeyValues.entrySet().stream().forEach(k -> System.out.println((char)k.getValue().intValue() ));
 		
 		/* Iterating a map without stream*/
 		//mapwithExchageKeyValues.forEach((k,v)-> System.out.println(k+ " " + v ));
+		
+		j++;
+		}
 		
 	}
 	
@@ -71,20 +87,21 @@ public class VirusInTheCity {
 
 	public static void main(String[] args) {
 
-		/*Scanner sc  = new Scanner(System.in);
-		int testcase = sc.nextInt();*/
-		//String [] strArray = new String[testcase];
-		/*for(int i = 0;i<testcase; i++) {
-			System.out.println("enter string");
-			
-		}*/
+		Scanner sc  = new Scanner(System.in);
+		String testcase = sc.nextLine();
+		
+		int testInt = Integer.parseInt(testcase);
+		String ar []  = new String[testInt];
+		for(int i = 0;i<testInt; i++) {
+			ar[i] = sc.nextLine();
+		}
 		
 		/* This approcah did not worked on condition, when multiple characters have same count, then print them according 
 		 * to their ASCII values(which have less ASCII values)*/
 		
-		//saferType("acdcghca");
+		//saferType("acdcghcad");
 		
-		saferType1("cdcghahgah");
+		saferType1(ar);
 		
 		
 		
