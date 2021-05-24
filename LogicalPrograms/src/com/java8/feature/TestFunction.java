@@ -1,5 +1,6 @@
 package com.java8.feature;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -12,13 +13,19 @@ public class TestFunction {
 		/*Function<Integer, String> a = abc(10);
 		String apply = a.apply(5);
 		System.out.println(apply);*/
+		List<String> namep = new ArrayList<>();
+		//name.add("xyz");
+		//name.forEach(System.out::println);
 		
 		List<String> name = Arrays.asList("chandan","churan","chameli","cepta");
-		
-		Stream<String> map = name.stream().map(na->na.startsWith("ch"))
+		namep.add("xyz");
+		namep.addAll(name);
+		/*Stream<String> map = name.stream().map(na->na.startsWith("ch"))
 		.map(n->{return n+"i";});
 		
-		map.forEach(System.out::println);
+		map.forEach(System.out::println);*/
+		
+		namep.forEach(System.out::println);
 		//System.out.println(setLatsetDocumentvalue.apply(10));
 		
 		

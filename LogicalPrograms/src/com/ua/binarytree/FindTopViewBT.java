@@ -142,8 +142,8 @@ public class FindTopViewBT {
 	        root.left.right = newNode(4);
 	        root.left.right.right = newNode(5);
 	        root.left.right.right.right = newNode(6);
-	        //topView(root);
-	        verticalOrder(root);
+	        topView(root);
+	        //verticalOrder(root);
 	    }
 		
 		

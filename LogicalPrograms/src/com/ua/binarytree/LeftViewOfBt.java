@@ -39,7 +39,9 @@ public class LeftViewOfBt {
 		queue.add(root);
 		while (!queue.isEmpty()) {
 
-			int n = queue.size();
+			int n = queue.size();// here size of queue is being used to move on different levels.
+			//TC:O(n) as we would be traversing each node of the tree.
+			
 			for (int i = 1; i <= n; i++) {
 				Node node = queue.poll();
 
@@ -60,6 +62,26 @@ public class LeftViewOfBt {
 		}
 
 	}
+	
+/*	public static void leftViewReferenceApproach(Node root, Integer l) {
+		
+		if(root == null)
+			return;
+		
+		if(l == 0)
+			System.out.println(root.data);
+		
+		leftViewReferenceApproach(root.left, l+1);
+		leftViewReferenceApproach(root.right, l+1);
+		
+		
+	}
+	*/
+	public static void call(Integer a) {
+		 a = a +1;
+		 System.out.println("a " + a);
+		
+	}
 
 	public static void main(String[] args) {
 
@@ -71,7 +93,8 @@ public class LeftViewOfBt {
 		root.left.right.right.right = newNode(6);
 
 		leftView(root);
-		// printTree(root);
+		 printTree(root);
+		
 
 	}
 

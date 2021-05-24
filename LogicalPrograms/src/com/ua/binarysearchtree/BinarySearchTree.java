@@ -44,6 +44,7 @@ public class BinarySearchTree {
     static int rcount = 0;
     static int[] result = new int[5];
     static int prev = Integer.MIN_VALUE;
+    static int maxnodes = Integer.MIN_VALUE;
 
 	public static Node buildBSTRec() {
 		Scanner sc = new Scanner(System.in);
@@ -127,17 +128,32 @@ public class BinarySearchTree {
 
 	
 	public static Tuple isBSTValid(Node root) {
+			//Base case
+		/*null is valid BST.*/
+		/*explanation https://stackoverflow.com/questions/18937604/is-null-a-binary-tree
+		  #:~:text=In%20pure%20computer%20science%2C%20null%20is%20a%20valid,no%20children%20is%20also%20valid%20%28but%20not%20empty%29.*/
+		/*max of subtree (null) : Integer.MIN_VALUE*/
+		/*min of subtree (null) : Integer.MAX_VALUE*/
 		if(root == null)
 			return new Tuple(Boolean.TRUE, Integer.MIN_VALUE, Integer.MAX_VALUE);
 		
 		Tuple leftResult = isBSTValid(root.left);
 		Tuple rightResult = isBSTValid(root.right);
 		
+		
+		/*-----------------------------Subtree is BST or not(a null is empty BST)---------------------------------------------------------*/
+		/*For a leaf node LST and RST are returning true & max of LST and RST will be Integer.MIN_VALUE, Integer.MAX_VALUE*/
 		boolean is_bst = leftResult.isBst == Boolean.TRUE && rightResult.isBst == Boolean.TRUE 
 				&& leftResult.maxOfSTree < root.data && rightResult.minOfSTree > root.data;
+				/*--------------------------------------------------------------------------------------*/
 				
+				int mnodes = (is_bst== true?countNode(root):0);
+				maxnodes = Math.max(maxnodes, mnodes);
+			
+				/* calculating max and min of LST and RST*/
 			int	max_result = Math.max(root.data, leftResult.maxOfSTree);
 				max_result = Math.max(max_result, rightResult.maxOfSTree);	
+				
 				
 				int	min_result = Math.min(root.data, leftResult.minOfSTree);
 				min_result = Math.min(min_result, rightResult.minOfSTree);
@@ -235,8 +251,8 @@ public class BinarySearchTree {
 		
 		
 		
-		boolean validBST = checkBtIsBst(root);
-		System.out.println(" validBST " + validBST);
+		//boolean validBST = checkBtIsBst(root);
+		//System.out.println(" validBST " + validBST);
 		
 		
 		/*This approach will be used in different problems*/
@@ -245,12 +261,14 @@ public class BinarySearchTree {
 		//2. max value of subtree
 		//3. min value of subtree
 		 Tuple bstValid = isBSTValid(root);
-		System.out.println(" IsBSTValid " + bstValid.isBst);
+		System.out.println(" IsBSTValid " + bstValid.isBst + " maxnodes " + maxnodes);
 
 	}
 	
 	//BST input
-/*	10
+/*	1006
+
+3
 	7
 	5
 	8
