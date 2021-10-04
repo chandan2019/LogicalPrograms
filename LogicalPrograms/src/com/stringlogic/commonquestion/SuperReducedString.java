@@ -1,14 +1,19 @@
 package com.stringlogic.commonquestion;
 
 public class SuperReducedString {
+	
+	static StringBuilder sb = new StringBuilder(); 
 
 	public static void main(String[] args) {
 
-		String str = "aaabccddd";
+		String str = "adaad";
 
 		//System.out.println("str : " + superReducedStringUsingRecursion(str));
 		
-		System.out.println("str : " + superReducedStringUsingDeleteMethod(str));
+		
+		//System.out.println("str : " + superReducedStringUsingDeleteMethod(str));
+		reducedString(str);
+		System.out.println(sb.toString());
 
 	}
 	
@@ -50,9 +55,9 @@ public class SuperReducedString {
 
 		if (s.charAt(0) == s.charAt(1)) {
 
-			str = str + superReducedStringUsingRecursion(s.substring(2));
+			str = /*str +*/ superReducedStringUsingRecursion(s.substring(2));
 		} else {
-			str = str + s.charAt(0) + superReducedStringUsingRecursion(s.substring(1));
+			str = /*str + */s.charAt(0) + superReducedStringUsingRecursion(s.substring(1));
 
 		}
 
@@ -67,6 +72,30 @@ public class SuperReducedString {
 		}
 		return str;
 
+	}
+	
+	//this is not a valid approach, its failing for abccbd 
+	public static void reducedString(String s) {
+		
+		if(s.length() == 1) {
+			sb.append(s);
+		return;	
+		}
+		
+		if(s.charAt(0) != s.charAt(1)) {
+			sb.append(s.charAt(0));
+			reducedString(s.substring(1));
+		}
+		else {
+			
+			reducedString(s.substring(2));
+		}
+		
+		s = sb.toString();
+		sb = new StringBuilder();
+		
+		reducedString(s);
+		
 	}
 
 }

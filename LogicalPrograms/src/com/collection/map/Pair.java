@@ -1,4 +1,4 @@
-package com.map;
+package com.collection.map;
 
 public class Pair implements Comparable<Pair>{
 

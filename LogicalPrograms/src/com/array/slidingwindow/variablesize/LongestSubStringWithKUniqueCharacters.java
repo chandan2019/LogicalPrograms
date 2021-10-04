@@ -33,6 +33,8 @@ public class LongestSubStringWithKUniqueCharacters {
 			}else if(map.size() == k) {
 				
 				max = Math.max(max, j-i+1);//getting result from calculation
+				//System.out.println(i+ "  "+ j+ "    " + s.substring(i,j+1)); to return the string as output we have to go for 
+				//O(n) space in window slide case as well
 				j++;
 				
 			}else if(map.size() > k) {

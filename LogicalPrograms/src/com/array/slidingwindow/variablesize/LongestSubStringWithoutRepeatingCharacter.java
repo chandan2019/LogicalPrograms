@@ -31,10 +31,9 @@ public class LongestSubStringWithoutRepeatingCharacter {
 			while(j<s.length()) {
 				map.put(s.charAt(j), map.getOrDefault(s.charAt(j), 0)+1);  //calculation
 				
-				if(map.size()>j-i+1) {
+				if(map.size()>j-i+1) { //j-i+1 this is window size, the window size should contains unique character. 
 					j++;
 				}else if(map.size() == j-i+1) {
-					
 					max = Math.max(max, j-i+1);//getting result from calculation
 					j++;
 					
